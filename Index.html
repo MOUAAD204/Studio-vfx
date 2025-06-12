@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio VFX - ستوديو فيجوال إفكتس</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cairo for Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS (Animate On Scroll) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- SwiperJS for Testimonials Slider -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <style>
+        :root {
+            --royal-blue: #4169E1;
+            --purple: #8A2BE2;
+            --bright-orange: #FFA500;
+            --elegant-black: #121212;
+            --text-light: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--elegant-black);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--bright-orange), var(--purple), var(--royal-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero-bg {
+            position: relative;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0%, rgba(18, 18, 18, 1) 95%);
+            z-index: 2;
+        }
+
+        .hero-bg video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .vfx-logo {
+            font-weight: 900;
+            font-size: 3rem;
+            animation: text-flicker 4s linear infinite;
+        }
+
+        @keyframes text-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow:
+                    0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 20px var(--purple),
+                    0 0 40px var(--purple),
+                    0 0 80px var(--purple);
+            }
+            20%, 24%, 55% {        
+                text-shadow: none;
+            }
+        }
+
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover-effect:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(138, 43, 226, 0.2), 0 10px 10px -5px rgba(138, 43, 226, 0.1);
+        }
+        
+        .sticky-header {
+            transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .header-scrolled {
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-grid img {
+            transition: transform 0.4s ease-in-out;
+        }
+        .portfolio-grid .group:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Swiper Customization */
+        .swiper-pagination-bullet {
+            background-color: var(--bright-orange) !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--bright-orange) !important;
+        }
+    </style>
+</head>
+<body class="bg-elegant-black">
+
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 p-4 sticky-header">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold gradient-text">Studio VFX</a>
+            <nav class="hidden md:flex items-center space-x-reverse space-x-6">
+                <a href="#home" class="hover:text-bright-orange transition-colors">الرئيسية</a>
+                <a href="#about" class="hover:text-bright-orange transition-colors">من نحن</a>
+                <a href="#services" class="hover:text-bright-orange transition-colors">خدماتنا</a>
+                <a href="#portfolio" class="hover:text-bright-orange transition-colors">أعمالنا</a>
+                <a href="#testimonials" class="hover:text-bright-orange transition-colors">آراء العملاء</a>
+                <a href="#contact" class="hover:text-bright-orange transition-colors">تواصل معنا</a>
+            </nav>
+            <div class="flex items-center space-x-reverse space-x-4">
+                 <div class="relative group">
+                    <button class="flex items-center space-x-1 space-x-reverse px-3 py-2 border border-gray-600 rounded-lg hover:bg-gray-800 transition">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span>العربية</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block right-0 mt-2 bg-gray-800 border border-gray-700 rounded-lg shadow-lg w-32">
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-purple">English</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-purple">Français</a>
+                    </div>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 bg-gray-900/90 rounded-lg p-4">
+            <a href="#home" class="block py-2 text-center hover:bg-purple rounded-md">الرئيسية</a>
+            <a href="#about" class="block py-2 text-center hover:bg-purple rounded-md">من نحن</a>
+            <a href="#services" class="block py-2 text-center hover:bg-purple rounded-md">خدماتنا</a>
+            <a href="#portfolio" class="block py-2 text-center hover:bg-purple rounded-md">أعمالنا</a>
+            <a href="#testimonials" class="block py-2 text-center hover:bg-purple rounded-md">آراء العملاء</a>
+            <a href="#contact" class="block py-2 text-center hover:bg-purple rounded-md">تواصل معنا</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Home Section -->
+        <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center p-4">
+            <video autoplay muted loop playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-liquid-bubbles-in-blue-and-purple-39972-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="relative z-10" data-aos="fade-up">
+                <h1 class="vfx-logo">Studio VFX</h1>
+                <p class="mt-4 text-2xl md:text-3xl font-semibold max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    "نحو رؤية بصرية تنطق بالإبداع"
+                </p>
+                <a href="#portfolio" class="mt-8 inline-block px-10 py-4 bg-gradient-to-r from-royal-blue via-purple to-bright-orange text-white font-bold rounded-full text-lg shadow-lg hover:shadow-2xl hover:scale-105 transform transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    شاهد أعمالنا
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. About Us Section -->
+        <section id="about" class="py-20 px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold gradient-text">من نحن؟</h2>
+                    <p class="mt-2 text-lg text-gray-400">قصة شغف، إبداع، واحترافية</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right">
+                        <img src="https://images.unsplash.com/photo-1572044162444-24c95f2d59da?q=80&w=1887&auto=format&fit=crop" alt="فريق ستوديو VFX يعمل" class="rounded-2xl shadow-2xl w-full h-auto">
+                    </div>
+                    <div data-aos="fade-left" class="space-y-6">
+                        <p class="text-xl leading-relaxed">في Studio VFX، نحن لا نُنتج محتوى بصريًا فحسب، بل نصنع تجارب لا تُنسى. بدأت رحلتنا بشغف عميق لتحويل الأفكار إلى واقع مرئي ملموس. نؤمن بأن كل مشروع هو قصة فريدة تستحق أن تُروى بأفضل صورة ممكنة، وهذا ما يدفعنا للابتكار المستمر.</p>
+                        <p class="leading-relaxed">قيمنا الأساسية هي <strong class="text-royal-blue">الاحتراف</strong> في كل تفصيل، <strong class="text-purple">الإبداع</strong> الذي لا يعرف حدودًا، و<strong class="text-bright-orange">الدقة</strong> في المواعيد والجودة. نحن شركاؤك في النجاح، ملتزمون بتحقيق رؤيتك وتجاوز توقعاتك.</p>
+                        <a href="#cv" class="inline-flex items-center space-x-2 space-x-reverse px-6 py-3 border-2 border-purple text-purple font-semibold rounded-lg hover:bg-purple hover:text-white transition-colors">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                            <span>تحميل السيرة الذاتية</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-20" data-aos="fade-up">
+                    <h3 class="text-center text-3xl font-bold mb-8">التقنيات التي نتقنها</h3>
+                    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                        <div class="text-center group" data-aos="zoom-in" data-aos-delay="100">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_Premiere_Pro_CC_icon.svg/1024px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Adobe Premiere Pro" class="h-20 w-20 mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <p class="mt-2 font-semibold">Premiere Pro</p>
+                        </div>
+                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="200">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Adobe_After_Effects_CC_icon.svg/1024px-Adobe_After_Effects_CC_icon.svg.png" alt="Adobe After Effects" class="h-20 w-20 mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <p class="mt-2 font-semibold">After Effects</p>
+                        </div>
+                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="300">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1024px-Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop" class="h-20 w-20 mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <p class="mt-2 font-semibold">Photoshop</p>
+                        </div>
+                        <div class="text-center group" data-aos="zoom-in" data-aos-delay="400">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Adobe_Audition_CC_icon.svg/1024px-Adobe_Audition_CC_icon.svg.png" alt="Adobe Audition" class="h-20 w-20 mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <p class="mt-2 font-semibold">Audition</p>
+                        </div>
+                         <div class="text-center group" data-aos="zoom-in" data-aos-delay="500">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/DaVinci_Resolve_17_logo.svg/1024px-DaVinci_Resolve_17_logo.svg.png" alt="DaVinci Resolve" class="h-20 w-20 mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <p class="mt-2 font-semibold">DaVinci Resolve</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Services Section -->
+        <section id="services" class="py-20 px-4 bg-gray-900/50">
+            <div class="container mx-auto">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold gradient-text">خدماتنا الإبداعية</h2>
+                    <p class="mt-2 text-lg text-gray-400">نحول أفكارك إلى روائع بصرية وسمعية</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1: Video Editing -->
+                    <div class="bg-gray-800 p-8 rounded-2xl text-center card-hover-effect group" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-24 h-24 mx-auto bg-gradient-to-br from-royal-blue to-purple rounded-full flex items-center justify-center mb-6 transform transition-transform duration-300 group-hover:scale-110">
+                            <i data-lucide="clapperboard" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">🎬 مونتاج احترافي</h3>
+                        <p class="text-gray-400 mb-6 min-h-[70px]">نقدم خدمات مونتاج الفيديو للأفلام القصيرة، الإعلانات، ومحتوى السوشيال ميديا بجودة سينمائية.</p>
+                        <a href="#contact" class="px-6 py-2 bg-purple text-white font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">اطلب الآن</a>
+                    </div>
+                     <!-- Service Card 2: Graphic Design -->
+                    <div class="bg-gray-800 p-8 rounded-2xl text-center card-hover-effect group" data-aos="fade-up" data-aos-delay="200">
+                         <div class="w-24 h-24 mx-auto bg-gradient-to-br from-purple to-bright-orange rounded-full flex items-center justify-center mb-6 transform transition-transform duration-300 group-hover:scale-110">
+                            <i data-lucide="paintbrush-2" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">🎨 تصميم جرافيكي مبتكر</h3>
+                        <p class="text-gray-400 mb-6 min-h-[70px]">نصمم هويات بصرية متكاملة، شعارات، بوستات سوشيال ميديا، ومطبوعات تعكس علامتك التجارية ببراعة.</p>
+                        <a href="#contact" class="px-6 py-2 bg-bright-orange text-white font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">اطلب الآن</a>
+                    </div>
+                     <!-- Service Card 3: Voice Over -->
+                    <div class="bg-gray-800 p-8 rounded-2xl text-center card-hover-effect group" data-aos="fade-up" data-aos-delay="300">
+                         <div class="w-24 h-24 mx-auto bg-gradient-to-br from-bright-orange to-royal-blue rounded-full flex items-center justify-center mb-6 transform transition-transform duration-300 group-hover:scale-110">
+                            <i data-lucide="mic" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">🎙️ تعليق صوتي بجودة بث</h3>
+                        <p class="text-gray-400 mb-6 min-h-[70px]">نسجل تعليقًا صوتيًا احترافيًا للإعلانات، الأفلام الوثائقية، والكتب الصوتية بأصوات متنوعة ونبرات متعددة.</p>
+                        <a href="#contact" class="px-6 py-2 bg-royal-blue text-white font-semibold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">اطلب الآن</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Portfolio Section -->
+        <section id="portfolio" class="py-20 px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold gradient-text">معرض أعمالنا</h2>
+                    <p class="mt-2 text-lg text-gray-400">شاهد إبداعنا على أرض الواقع</p>
+                </div>
+                
+                <!-- Portfolio Tabs -->
+                <div class="flex justify-center mb-8 space-x-4 space-x-reverse" id="portfolio-tabs" data-aos="fade-up" data-aos-delay="100">
+                    <button class="portfolio-tab-btn active px-6 py-2 font-semibold rounded-lg bg-purple" data-filter="video">فيديو</button>
+                    <button class="portfolio-tab-btn px-6 py-2 font-semibold rounded-lg text-gray-400 hover:bg-purple/50" data-filter="design">تصميمات</button>
+                    <button class="portfolio-tab-btn px-6 py-2 font-semibold rounded-lg text-gray-400 hover:bg-purple/50" data-filter="voiceover">تعليق صوتي</button>
+                </div>
+
+                <!-- Video Gallery -->
+                <div id="video-gallery" class="portfolio-content grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 rounded-lg overflow-hidden" data-aos="fade-up">
+                        <div class="aspect-w-16 aspect-h-9">
+                             <iframe src="https://www.youtube.com/embed/Scxs7L0hZqo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold">إعلان لشركة تقنية</h3>
+                            <p class="text-gray-400 mt-2">العميل: Tech Innovations | الأدوات: After Effects, Premiere Pro | الهدف: زيادة الوعي بالمنتج الجديد.</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                        <div class="aspect-w-16 aspect-h-9">
+                           <iframe src="https://player.vimeo.com/video/153158466?h=2e7399a845" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold">فيلم وثائقي قصير</h3>
+                            <p class="text-gray-400 mt-2">العميل: Nature's Voice | الأدوات: DaVinci Resolve | الهدف: إبراز جمال الطبيعة المحلية.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Gallery -->
+                <div id="design-gallery" class="portfolio-content hidden">
+                    <div class="portfolio-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <div class="group relative overflow-hidden rounded-lg" data-aos="zoom-in">
+                            <img src="https://placehold.co/600x600/8A2BE2/FFFFFF?text=تصميم+1" alt="تصميم جرافيك" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-4 text-center">
+                                <div><h4 class="font-bold text-white">هوية بصرية</h4><p class="text-sm text-gray-300">لشركة ناشئة في مجال القهوة</p></div>
+                            </div>
+                        </div>
+                         <div class="group relative overflow-hidden rounded-lg" data-aos="zoom-in" data-aos-delay="100">
+                            <img src="https://placehold.co/600x600/4169E1/FFFFFF?text=تصميم+2" alt="تصميم جرافيك" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-4 text-center">
+                                <div><h4 class="font-bold text-white">بوستات سوشيال ميديا</h4><p class="text-sm text-gray-300">حملة إعلانية لمطعم</p></div>
+                            </div>
+                        </div>
+                         <div class="group relative overflow-hidden rounded-lg" data-aos="zoom-in" data-aos-delay="200">
+                            <img src="https://placehold.co/600x600/FFA500/000000?text=تصميم+3" alt="تصميم جرافيك" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-4 text-center">
+                                <div><h4 class="font-bold text-white">تصميم شعار</h4><p class="text-sm text-gray-300">لمنصة تعليمية إلكترونية</p></div>
+                            </div>
+                        </div>
+                         <div class="group relative overflow-hidden rounded-lg" data-aos="zoom-in" data-aos-delay="300">
+                            <img src="https://placehold.co/600x600/1E90FF/FFFFFF?text=تصميم+4" alt="تصميم جرافيك" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-4 text-center">
+                                <div><h4 class="font-bold text-white">غلاف كتاب</h4><p class="text-sm text-gray-300">رواية خيال علمي</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voiceover Gallery -->
+                <div id="voiceover-gallery" class="portfolio-content hidden grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 rounded-lg p-6" data-aos="fade-up">
+                        <h3 class="text-xl font-bold mb-3">إعلان تلفزيوني - صوت حماسي</h3>
+                        <audio controls class="w-full">
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="mt-4 bg-gray-800 p-4 rounded-md">
+                           <p class="text-gray-400">النص: "هل أنت مستعد للانطلاق؟ اكتشف القوة بين يديك مع المنتج الجديد كليًا..."</p>
+                           <p class="text-bright-orange mt-2 font-semibold">اللغة: العربية | النبرة: حماسية، قوية</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg p-6" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-bold mb-3">فيلم وثائقي - صوت رخيم</h3>
+                        <audio controls class="w-full">
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="mt-4 bg-gray-800 p-4 rounded-md">
+                           <p class="text-gray-400">النص: "في أعماق المحيطات، حيث لا يصل ضوء الشمس، تتكشف أسرار لم ترها عين من قبل..."</p>
+                            <p class="text-bright-orange mt-2 font-semibold">اللغة: العربية | النبرة: هادئة، وثائقية</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. Testimonials Section -->
+        <section id="testimonials" class="py-20 px-4 bg-gray-900/50">
+            <div class="container mx-auto">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold gradient-text">ماذا قال عملاؤنا؟</h2>
+                    <p class="mt-2 text-lg text-gray-400">شهادات نعتز بها</p>
+                </div>
+                <!-- Swiper -->
+                <div class="swiper testimonials-slider" data-aos="fade-up">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gray-800 rounded-2xl p-8 max-w-2xl mx-auto">
+                                <i data-lucide="quote" class="w-12 h-12 text-purple opacity-50"></i>
+                                <p class="text-lg italic my-4">"احترافية عالية وجودة تفوق التوقعات. فريق Studio VFX حول فكرتنا إلى تحفة فنية. شكرًا لكم!"</p>
+                                <div class="flex items-center mt-6">
+                                    <img src="https://placehold.co/100x100/4169E1/FFFFFF?text=A" alt="Avatar" class="w-16 h-16 rounded-full">
+                                    <div class="mr-4">
+                                        <h4 class="font-bold text-xl">أحمد العلي</h4>
+                                        <p class="text-gray-400">مؤسس، شركة انطلاق</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gray-800 rounded-2xl p-8 max-w-2xl mx-auto">
+                                <i data-lucide="quote" class="w-12 h-12 text-purple opacity-50"></i>
+                                <p class="text-lg italic my-4">"التزام بالمواعيد وإبداع لا حدود له. التصميمات التي حصلت عليها كانت مذهلة وساهمت في نمو علامتي التجارية."</p>
+                                <div class="flex items-center mt-6">
+                                    <img src="https://placehold.co/100x100/FFA500/FFFFFF?text=F" alt="Avatar" class="w-16 h-16 rounded-full">
+                                    <div class="mr-4">
+                                        <h4 class="font-bold text-xl">فاطمة خالد</h4>
+                                        <p class="text-gray-400">مديرة تسويق</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gray-800 rounded-2xl p-8 max-w-2xl mx-auto">
+                                <i data-lucide="quote" class="w-12 h-12 text-purple opacity-50"></i>
+                                <p class="text-lg italic my-4">"التعليق الصوتي كان بجودة استثنائية ونبرة مثالية لمشروعي. أنصح بالتعامل معهم بشدة."</p>
+                                <div class="flex items-center mt-6">
+                                    <img src="https://placehold.co/100x100/8A2BE2/FFFFFF?text=Y" alt="Avatar" class="w-16 h-16 rounded-full">
+                                    <div class="mr-4">
+                                        <h4 class="font-bold text-xl">يوسف محمود</h4>
+                                        <p class="text-gray-400">منتج أفلام وثائقية</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination mt-8"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Contact Us Section -->
+        <section id="contact" class="py-20 px-4">
+            <div class="container mx-auto">
+                 <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold gradient-text">لنبدأ مشروعك القادم</h2>
+                    <p class="mt-2 text-lg text-gray-400">تواصل معنا الآن، نحن في انتظارك!</p>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <form class="space-y-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <input type="text" placeholder="الاسم الكامل" class="w-full bg-gray-800 border-2 border-gray-700 rounded-lg p-3 focus:border-purple focus:outline-none transition">
+                            <input type="email" placeholder="البريد الإلكتروني" class="w-full bg-gray-800 border-2 border-gray-700 rounded-lg p-3 focus:border-purple focus:outline-none transition">
+                        </div>
+                        <div>
+                            <select class="w-full bg-gray-800 border-2 border-gray-700 rounded-lg p-3 focus:border-purple focus:outline-none transition">
+                                <option>اختر نوع الخدمة</option>
+                                <option>مونتاج فيديو</option>
+                                <option>تصميم جرافيكي</option>
+                                <option>تعليق صوتي</option>
+                            </select>
+                        </div>
+                        <div>
+                            <textarea placeholder="رسالتك..." rows="5" class="w-full bg-gray-800 border-2 border-gray-700 rounded-lg p-3 focus:border-purple focus:outline-none transition"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="px-12 py-4 bg-gradient-to-r from-royal-blue via-purple to-bright-orange text-white font-bold rounded-full text-lg shadow-lg hover:shadow-2xl hover:scale-105 transform transition-all duration-300">
+                                أرسل طلبك
+                            </button>
+                        </div>
+                    </form>
+                    <div class="flex justify-center space-x-6 space-x-reverse mt-12" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#" class="text-gray-400 hover:text-bright-orange transition-colors"><i data-lucide="mail" class="w-8 h-8"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-bright-orange transition-colors"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-bright-orange transition-colors"><i data-lucide="send" class="w-8 h-8"></i></a> <!-- Behance equivalent -->
+                        <a href="#" class="text-gray-400 hover:text-bright-orange transition-colors"><i data-lucide="message-circle" class="w-8 h-8"></i></a> <!-- WhatsApp equivalent -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-4">
+        <div class="container mx-auto text-center text-gray-400">
+            <a href="#home" class="text-2xl font-bold gradient-text mb-4 inline-block">Studio VFX</a>
+            <div class="flex justify-center space-x-6 space-x-reverse mb-6">
+                <a href="#about" class="hover:text-white">من نحن</a>
+                <a href="#services" class="hover:text-white">خدماتنا</a>
+                <a href="#portfolio" class="hover:text-white">أعمالنا</a>
+                <a href="#contact" class="hover:text-white">تواصل معنا</a>
+            </div>
+            <p>&copy; 2024 Studio VFX. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Sticky Header on Scroll
+        const header = document.getElementById('main-header');
+        window.onscroll = function() {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        };
+
+        // Portfolio Tabs
+        const tabButtons = document.querySelectorAll('.portfolio-tab-btn');
+        const portfolioContents = document.querySelectorAll('.portfolio-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+
+                // Update button styles
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active', 'bg-purple');
+                    btn.classList.add('text-gray-400', 'hover:bg-purple/50');
+                });
+                button.classList.add('active', 'bg-purple');
+                button.classList.remove('text-gray-400', 'hover:bg-purple/50');
+
+                // Show/hide content
+                portfolioContents.forEach(content => {
+                    if (content.id === `${filter}-gallery`) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Initialize Testimonials Swiper
+        const swiper = new Swiper('.testimonials-slider', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+             breakpoints: {
+                640: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 1,
+                  spaceBetween: 40,
+                },
+                1024: {
+                  slidesPerView: 1,
+                  spaceBetween: 50,
+                },
+              },
+        });
+
+    </script>
+</body>
+</html>
